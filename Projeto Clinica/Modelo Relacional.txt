@@ -1,0 +1,95 @@
+Tabela Própria entre Atendente e tipoAtendimento
+	tipoAtendimento(id_tipoAtendimento, online, presencial)
+	Atendente(cod_atendente, e mail, telefone, cpf, nome)
+	Relação4(id_tipoAtendimento, cod_atendente)
+		Id_tipoAtendimento referência Atendimento
+		Cod_atendente referência Atendente
+ 
+Adição de Coluna entre Atendente e Consultório
+	Consultorio(especialidade, nome_medico, numero, cod_clinica, sala,     cod_atendente)
+	cod_atendente referência Atendente
+	Atendente(email, telefone, cpf, nome, cod_atendente )
+ 
+Adição de Coluna entre Atendente e Disponibilidade do Médico
+	disponibilidade_medico(horario, data, agenda, cod_atendente)
+	cod_atendente referência Atendente
+	Atendente(email, telefone, cpf, nome, cod_atendente )
+ 
+Fusão de tabela entre Disponibilidade do Médico e Consulta
+	disponibilidade_medico(horario, data, agenda, tipo, horario_consulta, dt_consulta, status_consulta, descricao, cod_consulta)
+ 
+Fusão de tabela entre Consulta e Paciente
+	consulta( tipo, horario_consulta, dt_consulta, status_consulta, descricao, cod_consulta, nome, cpf, telefone, email, cod_paciente)
+ 
+ 
+ 
+Tabela Própria entre Paciente e Laudo
+	paciente(nome, cpf, telefone, email, cod_paciente)
+laudo(descricao_laudo, dt_laudo, cod_laudo, hr_laudo )
+solicita(cod_paciente, cod_laudo)
+	cod_paciente referência paciente
+	cod_laudo referência laudo
+ 
+Tabela Própria entre Laudo e Medico
+laudo(descricao_laudo, dt_laudo, cod_laudo, hr_laudo )
+medico(crm, especialidade, cpf)
+emite(crm, cod_laudo)
+	crm referência medico
+	cod_laudo referência laudo
+ 
+Tabela Própria entre Medico e Consulta
+medico(crm, especialidade, cpf)
+consulta( tipo, horario_consulta, dt_consulta, status_consulta, descricao, cod_consulta)
+realiza(crm, cod_consulta)
+	crm referência medico
+	cod_consulta referência consulta
+ 
+Adição de Coluna entre Medico e Especialidade
+	medico(crm, especialidade, cpf)
+	especialidade(cod_medico,nome,crm)
+		crm referência medico
+ 
+ 
+ 
+ 
+Tabela Própria entre Consulta e Exame
+consulta( tipo, horario_consulta, dt_consulta, status_consulta, descricao, cod_consulta)
+exame(cod_exame, desc_exame, tipo_exame)
+agenda(cod_consulta, cod_exame)
+	cod_consulta referencia a consulta
+	cod_exame referencia exame
+ 
+Tabela Própria entre Exame e Laboratório
+	exame(cod_exame, desc_exame, tipo_exame)
+	laboratorio(cod_laboratorio, sala, status)
+	realiza(cod_exame, cod_laboratorio)
+		cod_exame referencia exame
+		cod_laboratorio referencia laboratorio
+ 
+Tabela Própria entre Consulta e Tratamento
+	consulta(tipo, horario_consulta, dt_consulta, status_consulta, descricao,   cod_consulta)
+	tratamento(descricao_tratamento, tipo_tratamento, cod_tratamento)
+	marca(cod_consulta, cod_tratamento)
+		cod_consulta referência consulta
+		cod_tratamento referência tratamento
+ 
+Tabela Própria entre Tratamento e Encaminhamento
+	tratamento(descricao_tratamento, tipo_tratamento, cod_tratamento)
+	encaminhamento(cod_encaminhamento, desc_encaminhamento)
+	tem(cod_tratamento, cod_encaminhamento)
+		cod_tratamento referência tratamento
+		cod_encaminhamento referencia encaminhamento
+ 
+Tabela Própria entre Encaminhamento e Rotina
+	encaminhamento(cod_encaminhamento, desc_encaminhamento)
+	rotina(cod_rotina, especialidade_marcada, consulta_diaria)
+	relacao2(cod_encaminhamento, cod_rotina)
+		cod_encaminhamento referência encaminhamento
+		cod_rotina referência rotina
+ 
+Tabela Própria entre Encaminhamento e Remedios
+	encaminhamento(cod_encaminhamento, desc_encaminhamento)
+	remedios(cod_remedio, nome_remedio, desc_remedio)
+	relacao1(cod_encaminhamento, cod_remedio)
+		cod_encaminhamento referência encaminhamento
+		cod_remedio referência remedios

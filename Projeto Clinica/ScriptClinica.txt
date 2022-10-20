@@ -1,0 +1,47 @@
+CREATE TABLE clinica.disponibilidade(
+codDisponibilidade int NOT NULL,
+status VARCHAR[20],
+codfunc INT NOT NULL,
+PRIMARY KEY (codDisponibilidade)
+FOREIGN KEY (codfunc) REFERENCES funcionario (codfunc));
+
+CREATE TABLE clinica.funcionario(
+codFunc int NOT NULL,
+PRIMARY KEY(codfunc)
+);
+
+
+CREATE TABLE clinica.tipo(
+codtipo int NOT NULL,
+nome VARCHAR[100],
+numero int,
+PRIMARY KEY (codTipo)
+);
+
+CREATE TABLE clinica.paciente(
+codpaciente int NOT NULL,
+PRIMARY KEY (codpaciente));
+
+CREATE TABLE clinica.exame(
+codexame int NOT NULL,
+descricao VARCHAR [100],
+codfunc int NOT NULL,
+codpaciente int NOT NULL,	
+PRIMARY KEY (codexame));
+FOREIGN KEY (codfunc) REFERENCES funcionario (codfunc)
+FOREIGN KEY (codpaciente) REFERENCES paciente (codpaciente)	
+);
+
+CREATE TABLE clinica.laboratorio(
+codlab int NOT NULL,
+status VARCHAR[100],
+sala int,
+codexame int NOT NULL,
+PRIMARY KEY (codlab)
+FOREIGN KEY (codexame) REFERENCES exame (codexame));	
+
+CREATE TABLE clinica.retorno(
+codretorno int NOT NULL,
+data DATE,
+hora int,
+PRIMARY KEY (codretorno));
